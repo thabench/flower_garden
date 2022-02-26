@@ -34,7 +34,7 @@ gardener_W = '◄'
 gardener_B = ' '
 gardener_positions = [gardener_N, gardener_S, gardener_E, gardener_W]
 
-flower = 'X'
+flower_on_map = 'X'
 
 map = [[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],

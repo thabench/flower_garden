@@ -1,4 +1,5 @@
 from gardenVisuals import *
+from flowerClass import Flower
 from random import randint, choice
 
 random_num_x = randint(0, 9)

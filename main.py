@@ -1,4 +1,5 @@
 from gardenerClass import Gardener
+from flowerClass import *
 from gardenVisuals import *
 from time import sleep
 import os
@@ -15,16 +16,25 @@ def start():
     sleep(3)
     clear()
 
+gardener = Gardener()
+flower = Flower()
 
 def print_map():
     for line in map:
         print(f'{line}\n')
-           
 
-gardener = Gardener()
+def check_collision(gardener_obj, flower_obj, position = gardener.set_position()):
+    if flower.x == gardener.x and flower.y == gardener.y:
+        gardener_obj.x = randint(0, 9)
+        gardener_obj.y = randint(0, 9)
+        return position
+               
 
 start()
+flower.set_flower_position()
 gardener.set_position()
+check_collision(gardener, flower)
+
 print_map()
 print(f'___YOU_ARE_AT_{gardener.y},{gardener.x}_________\n')
 
