@@ -135,4 +135,4 @@ class Gardener():
         pass
     
     def get_info(self):
-        pass
+        return f'Gardener is facing {self.get_orientation}\nGardener is at {self.x, self.y}\nTotal waterings made: {sum(self.number_of_shots_N, self.number_of_shots_S, self.number_of_shots_E, self.number_of_shots_W)}'

@@ -14,6 +14,9 @@ class Flower():
     def set_flower_position(self):
         position =  map[self.y][self.x] = flower_on_map
         return position
+    
+    def get_flower_position(self):
+        return self.x, self.y
         
 
 class Points():

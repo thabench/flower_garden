@@ -24,10 +24,28 @@ def print_map():
         print(f'{line}\n')
 
 def check_collision(gardener_obj, flower_obj, position = gardener.set_position()):
-    if flower.x == gardener.x and flower.y == gardener.y:
+    orientation = gardener_obj.get_orientation()
+    
+    if orientation == gardener_N and gardener_obj.y - 1 == flower_obj.y and gardener_obj.x == flower_obj.x:
+        print('DO NOT STEP ON FLOWERS!')
+        return True
+    if orientation == gardener_S and gardener_obj.y + 1 == flower_obj.y and gardener_obj.x == flower_obj.x:
+        print('DO NOT STEP ON FLOWERS!')
+        return True
+    if orientation == gardener_E and gardener_obj.y == flower_obj.y and gardener_obj.x + 1 == flower_obj.x:
+        print('DO NOT STEP ON FLOWERS!')
+        return True
+    if orientation == gardener_W and gardener_obj.y == flower_obj.y and gardener_obj.x - 1 == flower_obj.x:
+        print('DO NOT STEP ON FLOWERS!')
+        return True
+    
+    elif flower_obj.x == gardener_obj.x and flower_obj.y == gardener_obj.y:
+        flower_obj.set_flower_position()
         gardener_obj.x = randint(0, 9)
         gardener_obj.y = randint(0, 9)
-        return position
+        return True, position
+    else:
+        return False
                
 
 start()
@@ -47,7 +65,8 @@ while game_on == True:
         print('YOUR SCORE IS: TBA')
     elif choice == 'f':
         clear()
-        gardener.move_forward()
+        if check_collision(gardener, flower) == False:
+            gardener.move_forward()
         print_map()
         print(f'___YOU_MOVED_TO_{gardener.y},{gardener.x}_________\n')
     elif choice == 'b':
