@@ -58,11 +58,13 @@ print(f'___YOU_ARE_AT_{gardener.y},{gardener.x}_________\n')
 
 while game_on == True:
     
-    choice = input('F - move forward,\nB - move backwards,\nR - turn right,\nL - turn left,\nX - shoot,\nQ - quit\nMake a choice:').lower()
+    choice = input('F - move forward,\nB - move backwards,\nR - turn right,\nL - turn left,\nX - shoot,\nI - get info\nQ - quit\nMake a choice:').lower()
     if choice == 'q':
         clear()
         game_on = False
         print('YOUR SCORE IS: TBA')
+    elif choice == 'i':
+        print(gardener.get_info())
     elif choice == 'f':
         clear()
         if check_collision(gardener, flower) == False:
@@ -86,19 +88,9 @@ while game_on == True:
         print(f'___YOU_TURNED_LEFT_AT_{gardener.y},{gardener.x}_________\n')
     elif choice == 'x':
         clear()
+        gardener.make_a_shot()
         print_map()
-        print('NOT READY YET')
-        # if target_hit == True:
-        #     if gardener.orientation == tank_N:
-        #         gardener.number_of_shots_N += 1
-        #     elif gardener.orientation == tank_S:
-        #         gardener.number_of_shots_S += 1
-        #     elif gardener.orientation == tank_E:
-        #         gardener.number_of_shots_E += 1
-        #     elif gardener.orientation == tank_W:
-        #         gardener.number_of_shots_W += 1
-        #     else:
-        #         print('Target missed')
+        
     else:
         clear()
         print_map()

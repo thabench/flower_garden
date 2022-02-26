@@ -132,7 +132,26 @@ class Gardener():
             return self.set_position()
 
     def make_a_shot(self):
-        pass
+        if self.orientation == gardener_N:
+            self.number_of_shots_N += 1
+        elif self.orientation == gardener_S:
+            self.number_of_shots_S += 1
+        elif self.orientation == gardener_E:
+            self.number_of_shots_E += 1
+        elif self.orientation == gardener_W:
+            self.number_of_shots_W += 1
+            
     
     def get_info(self):
-        return f'Gardener is facing {self.get_orientation}\nGardener is at {self.x, self.y}\nTotal waterings made: {sum(self.number_of_shots_N, self.number_of_shots_S, self.number_of_shots_E, self.number_of_shots_W)}'
+        return f'''\tGardener is facing {self.get_orientation()}\n
+        Gardener is at {self.x, self.y}\n
+        Total waterings made: {sum([self.number_of_shots_N, self.number_of_shots_S, self.number_of_shots_E, self.number_of_shots_W])}\n
+        Watered north: {self.number_of_shots_N}\n
+        Watered south: {self.number_of_shots_S}\n
+        Watered east: {self.number_of_shots_E}\n
+        Watered west: {self.number_of_shots_W}\n'''
+                    
+class Points():
+    def __init__(self):
+        self.player_points = 100
+        

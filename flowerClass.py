@@ -18,7 +18,4 @@ class Flower():
     def get_flower_position(self):
         return self.x, self.y
         
-
-class Points():
-    def __init__(self):
-        player_points = 100
+        
