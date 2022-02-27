@@ -9,6 +9,7 @@ class Flower():
         self.x = x
         self.y = y
         self.bloom = flower_on_map
+        self.succesfully_watered = 0
         if(x < 0 or y < 0):
             raise ValueError("Only positive coordinates!")
         
