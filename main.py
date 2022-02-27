@@ -1,4 +1,4 @@
-from gardenerClass import Gardener
+from gardenerClass import Gardener, Points
 from flowerClass import *
 from gardenVisuals import *
 from time import sleep
@@ -18,6 +18,7 @@ def start():
 
 gardener = Gardener()
 flower = Flower()
+point_counter = Points()
 
 def print_map():
     for line in map:
@@ -46,7 +47,50 @@ def check_collision(gardener_obj, flower_obj, position = gardener.set_position()
         return True, position
     else:
         return False
-               
+    
+def check_flower_waterred(gardener_obj, flower_obj):
+    orientation = gardener_obj.get_orientation()
+    
+    if orientation == gardener_N and gardener_obj.y > flower_obj.y and gardener_obj.x == flower_obj.x:
+        print('FLOWER WATERRED')
+        flower_obj.bloom = ' '
+        flower_obj.set_flower_position()
+        flower_obj.x = randint(0, 9)
+        flower_obj.y = randint(0, 9)
+        flower_obj.bloom = 'X'
+        flower_obj.set_flower_position()
+        return True
+    if orientation == gardener_S and gardener_obj.y < flower_obj.y and gardener_obj.x == flower_obj.x:
+        print('FLOWER WATERRED')
+        flower_obj.bloom = ' '
+        flower_obj.set_flower_position()
+        flower_obj.x = randint(0, 9)
+        flower_obj.y = randint(0, 9)
+        flower_obj.bloom = 'X'
+        flower_obj.set_flower_position()
+        return True
+    if orientation == gardener_E and gardener_obj.y == flower_obj.y and gardener_obj.x < flower_obj.x:
+        print('FLOWER WATERRED')
+        flower_obj.bloom = ' '
+        flower_obj.set_flower_position()
+        flower_obj.x = randint(0, 9)
+        flower_obj.y = randint(0, 9)
+        flower_obj.bloom = 'X'
+        flower_obj.set_flower_position()
+        return True
+    if orientation == gardener_W and gardener_obj.y == flower_obj.y and gardener_obj.x > flower_obj.x:
+        print('FLOWER WATERRED')
+        flower_obj.bloom = ' '
+        flower_obj.set_flower_position()
+        flower_obj.x = randint(0, 9)
+        flower_obj.y = randint(0, 9)
+        flower_obj.bloom = 'X'
+        flower_obj.set_flower_position()
+        return True
+    else:
+        print('FLOWER MISSED')
+        return False
+         
 
 start()
 flower.set_flower_position()
@@ -58,40 +102,50 @@ print(f'___YOU_ARE_AT_{gardener.y},{gardener.x}_________\n')
 
 while game_on == True:
     
-    choice = input('F - move forward,\nB - move backwards,\nR - turn right,\nL - turn left,\nX - shoot,\nI - get info\nQ - quit\nMake a choice:').lower()
+    choice = input('F - move forward,\nB - move backwards,\nR - turn right,\nL - turn left,\nX - splash water,\nI - get info\nQ - quit\nMake a choice:').lower()
     if choice == 'q':
         clear()
         game_on = False
-        print('YOUR SCORE IS: TBA')
+    elif point_counter.player_points == 0:
+        print ('OUT OF POINTS! YOUR SCORE IS: ')
     elif choice == 'i':
         print(gardener.get_info())
     elif choice == 'f':
         clear()
         if check_collision(gardener, flower) == False:
             gardener.move_forward()
+            point_counter.player_points -= 10
         print_map()
         print(f'___YOU_MOVED_TO_{gardener.y},{gardener.x}_________\n')
     elif choice == 'b':
         clear()
         gardener.move_backwards()
+        point_counter.player_points -= 10
         print_map()
         print(f'___YOU_MOVED_TO_{gardener.y},{gardener.x}_________\n')
     elif choice == 'r':
         clear()
         gardener.turn_right()
+        point_counter.player_points -= 10
         print_map()
         print(f'___YOU_TURNED_RIGHT_AT_{gardener.y},{gardener.x}_________\n')
     elif choice == 'l':
         clear()
         gardener.turn_left()
+        point_counter.player_points -= 10
         print_map()
         print(f'___YOU_TURNED_LEFT_AT_{gardener.y},{gardener.x}_________\n')
     elif choice == 'x':
         clear()
-        gardener.make_a_shot()
+        gardener.make_a_splash()
+        if check_flower_waterred(gardener, flower) == True:
+            point_counter.player_points += 100
+        else:
+            point_counter.player_points -= 10
         print_map()
         
     else:
         clear()
         print_map()
         print('WRONG CHOICE! MAKE A VALID CHOICE FROM LIST BELOW')
+    print(f'POINTS: {point_counter.player_points}')

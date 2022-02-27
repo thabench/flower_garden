@@ -8,11 +8,12 @@ class Flower():
     def __init__(self, x=random_num_x, y=random_num_y):
         self.x = x
         self.y = y
+        self.bloom = flower_on_map
         if(x < 0 or y < 0):
             raise ValueError("Only positive coordinates!")
         
     def set_flower_position(self):
-        position =  map[self.y][self.x] = flower_on_map
+        position =  map[self.y][self.x] = self.bloom
         return position
     
     def get_flower_position(self):

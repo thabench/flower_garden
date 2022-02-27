@@ -10,10 +10,10 @@ class Gardener():
         self.x = x
         self.y = y
         self.orientation = choice(gardener_positions)
-        self.number_of_shots_N = 0
-        self.number_of_shots_S = 0
-        self.number_of_shots_E = 0
-        self.number_of_shots_W = 0
+        self.number_of_splashes_N = 0
+        self.number_of_splashes_S = 0
+        self.number_of_splashes_E = 0
+        self.number_of_splashes_W = 0
         if(x < 0 or y < 0):
             raise ValueError("Only positive coordinates!")
 
@@ -131,25 +131,25 @@ class Gardener():
             self.orientation = gardener_N
             return self.set_position()
 
-    def make_a_shot(self):
+    def make_a_splash(self):
         if self.orientation == gardener_N:
-            self.number_of_shots_N += 1
+            self.number_of_splashes_N += 1
         elif self.orientation == gardener_S:
-            self.number_of_shots_S += 1
+            self.number_of_splashes_S += 1
         elif self.orientation == gardener_E:
-            self.number_of_shots_E += 1
+            self.number_of_splashes_E += 1
         elif self.orientation == gardener_W:
-            self.number_of_shots_W += 1
+            self.number_of_splashes_W += 1
             
     
     def get_info(self):
         return f'''\tGardener is facing {self.get_orientation()}\n
         Gardener is at {self.x, self.y}\n
-        Total waterings made: {sum([self.number_of_shots_N, self.number_of_shots_S, self.number_of_shots_E, self.number_of_shots_W])}\n
-        Watered north: {self.number_of_shots_N}\n
-        Watered south: {self.number_of_shots_S}\n
-        Watered east: {self.number_of_shots_E}\n
-        Watered west: {self.number_of_shots_W}\n'''
+        Total Splashes made: {sum([self.number_of_splashes_N, self.number_of_splashes_S, self.number_of_splashes_E, self.number_of_splashes_W])}\n
+        Splashed north: {self.number_of_splashes_N}\n
+        Splashed south: {self.number_of_splashes_S}\n
+        Splashed east: {self.number_of_splashes_E}\n
+        Splashed west: {self.number_of_splashes_W}\n'''
                     
 class Points():
     def __init__(self):
